@@ -1,19 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { Link } from "react-router-native";
 
 const styles = StyleSheet.create({
     text: {
         color: 'white',
         fontSize: 15,
         fontWeight: '700',
+        //paddingLeft: 10,
+        paddingRight: 10,
       }
   });
 
-const AppBarTab = ({title}) => {
+const AppBarTab = ({title, link}) => {
   return (
     <View style={styles.container}>
-        <Pressable><Text style={styles.text}>{title}</Text></Pressable>
-    
+        <Pressable>
+          <Link to={link}>
+            <Text style={styles.text}>{title}</Text>
+          </Link>
+        </Pressable>
     </View>
   );
 };

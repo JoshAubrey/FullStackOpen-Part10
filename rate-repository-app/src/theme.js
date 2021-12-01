@@ -7,6 +7,7 @@ const theme = {
       appBar: '#24292e',
       main: '#e1e4e8',
       repoItem: 'white',
+      error: '#d73a4a',
     },
     fontSizes: {
       body: 14,
