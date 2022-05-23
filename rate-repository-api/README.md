@@ -111,3 +111,11 @@ id
 username
 }
 }
+
+query repo {
+repository(id: "jaredpalmer.formik") {
+id
+fullName
+url
+}
+}

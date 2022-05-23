@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const initialValues = {
-  username: "",
-  password: "",
-};
+// const initialValues = {
+//   username: "",
+//   password: "",
+// };
 
 const SignInForm = ({ onSubmit }) => {
   return (
@@ -49,16 +49,45 @@ const SignInForm = ({ onSubmit }) => {
   );
 };
 
-const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .min(3, "Username must be at least 3 characters long.")
-    .required("Username is required"),
-  password: yup
-    .string()
-    .min(3, "Password must be at least 3 characters long.")
-    .required("Password is required"),
-});
+// const validationSchema = yup.object().shape({
+//   username: yup
+//     .string()
+//     .min(3, "Username must be at least 3 characters long.")
+//     .required("Username is required"),
+//   password: yup
+//     .string()
+//     .min(3, "Password must be at least 3 characters long.")
+//     .required("Password is required"),
+// });
+
+export const SignInContainer = ({ onSubmit }) => {
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  const validationSchema = yup.object().shape({
+    username: yup
+      .string()
+      .min(3, "Username must be at least 3 characters long.")
+      .required("Username is required"),
+    password: yup
+      .string()
+      .min(3, "Password must be at least 3 characters long.")
+      .required("Password is required"),
+  });
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
+
+};
 
 const SignIn = () => {
   const [signIn] = useSignIn();
@@ -79,13 +108,15 @@ const SignIn = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
+    // <Formik
+    //   initialValues={initialValues}
+    //   onSubmit={onSubmit}
+    //   validationSchema={validationSchema}
+    // >
+    //   {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    // </Formik>
+
+    <SignInContainer onSubmit={onSubmit} />
   );
 };
 

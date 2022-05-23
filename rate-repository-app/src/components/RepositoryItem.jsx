@@ -53,7 +53,7 @@ const RepositoryItem = ({item}) => {
   };
   
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
 
       <View style={styles.flexTop}>
         <Image

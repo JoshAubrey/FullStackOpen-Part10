@@ -1,8 +1,9 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { Pressable, FlatList, View, StyleSheet } from 'react-native';
 //import { useState, useEffect } from 'react';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
+import { useHistory } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
@@ -69,6 +70,26 @@ const ItemSeparator = () => <View style={styles.separator} />;
 //   );
 // };
 
+export const RepositoryListContainer = ({ repositories }) => {
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : [];
+    
+  const history = useHistory();
+
+  return (
+    <FlatList
+      data={repositoryNodes}
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={({item}) => (
+        <Pressable onPress={() => history.push(`/${item.id}`)} >
+          <RepositoryItem item={item} />
+        </Pressable>
+      )}
+    />
+  );
+};
+
 const RepositoryList = () => {
   // const [repositories, setRepositories] = useState();
 
@@ -89,17 +110,19 @@ const RepositoryList = () => {
   const { repositories } = useRepositories();
 
   // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
-    : [];
+  // const repositoryNodes = repositories
+  //   ? repositories.edges.map(edge => edge.node)
+  //   : [];
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({item}) => <RepositoryItem item={item} />}
-    />
-  );
+  // return (
+  //   <FlatList
+  //     data={repositoryNodes}
+  //     ItemSeparatorComponent={ItemSeparator}
+  //     renderItem={({item}) => <RepositoryItem item={item} />}
+  //   />
+  // );
+
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;

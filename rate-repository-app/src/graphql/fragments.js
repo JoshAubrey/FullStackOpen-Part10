@@ -12,8 +12,11 @@ export const REPOSITORY_DETAILS = gql`
     stargazersCount
     watchersCount
     forksCount
+    openIssuesCount
+    url
     ownerAvatarUrl
     description
     language
+    authorizedUserHasReviewed
   }
 `;
